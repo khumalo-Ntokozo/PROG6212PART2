@@ -5,7 +5,7 @@ using ProgrammingPOE.Tests.Services;
 
 namespace ProgrammingPOE.Tests
 {
-    // Claim 
+    // Clai
     public class ClaimTests
     {
         [Fact]
