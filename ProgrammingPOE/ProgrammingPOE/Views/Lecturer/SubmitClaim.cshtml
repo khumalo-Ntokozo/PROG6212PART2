@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Submit Claim";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">Submit Monthly Claim</h3>
+                </div>
+                <div class="card-body">
+                    @if (TempData["Message"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            @TempData["Message"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
+
+                    <!-- MAKE SURE enctype="multipart/form-data" IS INCLUDED -->
+                    <form asp-action="SubmitClaim" enctype="multipart/form-data" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="hoursWorked" class="form-label fw-bold">Hours Worked</label>
+                                <input name="hoursWorked" type="number" step="0.5" min="0.5" max="500"
+                                       class="form-control" required placeholder="Enter hours worked">
+                                <small class="form-text text-muted">Minimum 0.5 hours, maximum 500 hours</small>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="hourlyRate" class="form-label fw-bold">Hourly Rate (ZAR)</label>
+                                <input name="hourlyRate" type="number" step="0.01" min="0" max="10000"
+                                       class="form-control" required placeholder="Enter hourly rate">
+                                <small class="form-text text-muted">Rate in South African Rand</small>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="notes" class="form-label fw-bold">Additional Notes (Optional)</label>
+                            <textarea name="notes" class="form-control" rows="4"
+                                      placeholder="Enter any additional information about this claim..."></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="upload" class="form-label fw-bold">Supporting Document</label>
+                            <!-- REMOVE or MODIFY the accept attribute to show all files -->
+                            <input name="upload" type="file" class="form-control">
+                            <small class="form-text text-muted">
+                                Allowed formats: PDF, Word, Excel, Images, Text files. Maximum file size: 5MB
+                            </small>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                Submit Claim
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
